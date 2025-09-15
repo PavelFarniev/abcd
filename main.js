@@ -32,7 +32,7 @@ form?.addEventListener('submit', (e) => {
                 !el.checkValidity());
         });
         return;
-    }
+    } //sdfsdf
 // 3) Успешная «отправка» (без сервера)
     e.preventDefault();
     alert('Форма успешно отправлена! (Это демо, данные никуда не ушли)');

@@ -13,7 +13,7 @@ input, select, textarea, button {
     border-radius: 8px;
     background: #fff;
 }
-/* Кнопка по умолчанию */
+/* Кнопка по умолчанию f*/
 button, [type="submit"] {
     background: #0a84ff;
     color: #fff;
