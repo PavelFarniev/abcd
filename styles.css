@@ -1,30 +1,189 @@
-/* БАЗА: читаемость и предсказуемость размеров */
+/* Reset */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-sans-serif; line-height: 1.5; }
-/* Формы: размеры, отступы, визуальный порядок */
-label { display: block; margin: 0.5rem 0 0.25rem; }
-input, select, textarea, button {
-    width: 100%;
-    max-width: 480px;
-    padding: .5rem .75rem;
-    border: 1px solid #c8c8c8;
-    border-radius: 8px;
-    background: #fff;
+body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    line-height: 1.5;
 }
-/* Кнопка по умолчанию f*/
-button, [type="submit"] {
-    background: #0a84ff;
+:root {
+    /* Палитра */
+    --color-bg: #fff;
+    --color-fg: #0b0b0b;
+    --color-muted: #666;
+    --color-primary: #e63946;       /* 🔴 красный */
+    --color-primary-hover: #c71c2c; /* 🔴 тёмно-красный */
+    --color-danger: #b00020;
+    /* Типографика и размеры */
+    --font-body: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --space-1: 4px; --space-2: 8px; --space-3: 16px; --space-4: 24px; --space-5: 40px;
+    /* Скругления и тени */
+    --radius: 12px;
+    --shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+}
+/* Тёмная тема */
+body.theme-dark {
+    --color-bg: #0b0b0b;
+    --color-fg: #f5f5f5;
+    --color-muted: #aaa;
+    --color-primary: #ff6a70;
+}
+/* БАЗА */
+label { display: block; margin: 0.5rem 0 0.25rem; }
+input, select, textarea, button { width: 100%; max-width: 480px; padding: .5rem .75rem; border: 1px solid #c8c8c8; border-radius: 8px; background: #fff; font-family: var(--font-body); font-size: 1rem; }
+button, [type="submit"], .button {
+    background: var(--color-primary);
     color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 8px;
+    padding: .5rem .75rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem 0.25rem; /* отступ между кнопками */
 }
-/* Состояния: клавиатура/мышь/ошибки */
+/* Группы кнопок — перенос строк при маленьких экранах */
+.button-group, .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+button:hover, [type="submit"]:hover, .button:hover,
+button:focus-visible, [type="submit"]:focus-visible, .button:focus-visible {
+    background: var(--color-primary-hover);
+}
+/* Состояния */
 :where(input, select, textarea, button):focus-visible {
-    outline: 2px solid #0a84ff; outline-offset: 2px;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
-button:hover { filter: brightness(0.95); }
 :disabled, [aria-disabled="true"] { opacity: .6; cursor: not-allowed; }
-/* Подсветка ошибочных полей (установите aria-invalid="true") */
-[aria-invalid="true"] { border-color: #b00020; }
+[aria-invalid="true"] { border-color: var(--color-danger); }
+.container { width: min(100% - 2*var(--space-4), 1120px); margin-inline: auto; }
+.section { padding-block: var(--space-5); }
+.section__title { margin: 0 0 var(--space-3); }
+
+/* Nav */
+.nav__link {
+    text-decoration: none;
+    color: var(--color-fg);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+}
+.nav__link:hover, .nav__link:focus-visible {
+    background: rgba(230,57,70,0.1);
+    color: var(--color-primary);
+}
+.nav__link--active {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Breadcrumbs */
+html { scroll-behavior: smooth; }
+.breadcrumbs {
+    padding: var(--space-2) var(--space-4);
+    font-size: 0.9rem;
+}
+.breadcrumbs__list {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.breadcrumbs__item::after {
+    content: "→";
+    margin-left: 0.5rem;
+    color: #999;
+}
+.breadcrumbs__item:last-child::after { content: ""; }
+.breadcrumbs__link { color: var(--color-primary); text-decoration: none; }
+.breadcrumbs__link:hover { text-decoration: underline; }
+
+/* Target */
+:target {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+}
+
+/* Модалка */
+.modal {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    padding: var(--space-4);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 520px;
+}
+
+/* Поля формы внутри .form */
+.form input,
+.form select,
+.form textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: var(--space-3);
+    border: 2px solid #c8c8c8;
+    border-radius: 19px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+/* Фокус на полях формы */
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+}
+
+/* Ошибки */
+.form [aria-invalid="true"] {
+    border-color: var(--color-danger);
+}
+
+/* Кнопки формы внутри .form */
+.form button {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 111px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    margin-top: var(--space-2);
+}
+.form button:hover,
+.form button:focus-visible {
+    background: var(--color-primary-hover);
+}
+
+/* Кнопки внутри .form-actions */
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--space-3);
+}
+
+/* Фон модалки */
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Диалог */
+dialog {
+    border: none;
+    border-radius: var(--radius);
+    padding: 0;
+}
+
+/* Обёртка формы для модалки */
+dialog .form {
+    padding: var(--space-4);
+}

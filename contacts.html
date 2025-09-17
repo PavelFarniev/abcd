@@ -5,29 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Темкин сайт</title>
     <meta name="description" content="Контакты моего сайта">
-    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
 <body>
 
-<header>
-    <a href="/">Темкин сайт</a>
-    <!-- Главное меню навfигации -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
+<header class="header">
+    <a class="header__brand" href="/">Темкин сайт</a>
+    <nav class="nav" aria-label="Основная навигация">
+        <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link" href="index.html">Главная</a></li>
+            <li class="nav__item"><a class="nav__link" href="about.html">О нас</a></li>
+            <li class="nav__item"><a class="nav__link nav__link--active" href="contacts.html" aria-current="page">Контакты</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
-    <!-- Простые "хлебные крошки" -->
-    <nav aria-label="Хлебные крошки">
-        <a href="index.html">Главная</a> →
-        <span>Контакты</span>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="index.html">Главная</a></li>
+            <li class="breadcrumbs__item">Контакты</li>
+        </ul>
     </nav>
 
     <h1>Контакты</h1>

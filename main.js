@@ -23,7 +23,7 @@ form?.addEventListener('submit', (e) => {
 // Пример: таргетированное сообщение
         const email = form.elements.email;
         if (email?.validity.typeMismatch) {
-            email.setCustomValidity('Введите корректный e-mail, например name@example.com');
+            email.setCustomValidity('Ты не понял, надо: name@example.com');
         }
         form.reportValidity(); // показать браузерные подсказки
 // A11y: подсветка проблемных полей
@@ -35,7 +35,7 @@ form?.addEventListener('submit', (e) => {
     } //sdfsdf
 // 3) Успешная «отправка» (без сервера)
     e.preventDefault();
-    alert('Форма успешно отправлена! (Это демо, данные никуда не ушли)');
+    alert('Форма отправлена, но денег на сервер нет, поэтому ваши данные никуда не ушли');
 // Если форма внутри <dialog>, закрываем окно:
     document.getElementById('contactDialog')?.close('success');
     form.reset();
